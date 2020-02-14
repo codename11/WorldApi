@@ -25,8 +25,9 @@ class CountryController extends Controller
         //$country = Country::where("Code","AFG")->get();
         //$country = Country::where("Capital",$city->ID)->get();
         //$language = Country::where("Code","AFG")->with('language')->get();
-        $allInOne = Country::where("Code","AFG")->with('capital',"language")->get();
-        $allInAll = Country::with('capital',"language")->get();
+        //$allInOne = Country::where("Code","AFG")->with('capital',"language")->get();
+        //$allInAll = Country::with('capital',"language")->get();
+        $countries = Country::with('capital',"language")->paginate(5);
         /*$response = array(
             "capital" => $capital,
             "country" => $country,
@@ -35,7 +36,7 @@ class CountryController extends Controller
             "allInAll" => $allInAll,
         );*/
         //return response()->json($allInOne);
-        return CountryResource::collection($allInOne);
+        return CountryResource::collection($countries);
     }
 
     /**
@@ -56,8 +57,8 @@ class CountryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {//Not working. See index.
-        $country = Country::with('capital',"language")->find($id);
+    {
+        $country = Country::with('capital',"language")->where("Code",$id)->get();
     
         return new CountryResource($country);
     }

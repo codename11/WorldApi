@@ -16,3 +16,9 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+//List countries
+Route::get("countries", "CountryController@index");
+
+//Show country(single)
+Route::get("country/{id}", "CountryController@show");

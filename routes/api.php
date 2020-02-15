@@ -22,3 +22,15 @@ Route::get("countries", "CountryController@index");
 
 //Show country(single)
 Route::get("country/{id}", "CountryController@show");
+
+//List cities
+Route::get("cities", "CityController@index");
+
+//Show city(single)
+Route::get("city/{id}", "CityController@show");
+
+//List languages
+Route::get("languages", "CountryLanguageController@index");
+
+//Show language(single)
+Route::get("language/{id}", "CountryLanguageController@show");

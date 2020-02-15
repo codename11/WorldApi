@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use App\City;
 use Illuminate\Http\Request;
 
+use App\Http\Requests;
+use App\Country;
+use App\CountryLanguage;
+use App\Http\Resources\City as CityResource;
+
 class CityController extends Controller
 {
     /**
@@ -14,7 +19,8 @@ class CityController extends Controller
      */
     public function index()
     {
-        //
+        $cities = City::with('country',"language")->paginate(5);
+        return CityResource::collection($cities);
     }
 
     /**
@@ -44,9 +50,11 @@ class CityController extends Controller
      * @param  \App\City  $city
      * @return \Illuminate\Http\Response
      */
-    public function show(City $city)
+    public function show($id)
     {
-        //
+        $city = City::with('country',"language")->where("ID",$id)->get();
+    
+        return new CityResource($city);
     }
 
     /**

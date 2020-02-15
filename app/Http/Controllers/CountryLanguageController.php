@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use App\CountryLanguage;
 use Illuminate\Http\Request;
 
+use App\Http\Requests;
+use App\Country;
+use App\City;
+use App\Http\Resources\language as language;
+
 class CountryLanguageController extends Controller
 {
     /**
@@ -14,7 +19,8 @@ class CountryLanguageController extends Controller
      */
     public function index()
     {
-        //
+        $countryLanguage = CountryLanguage::with('country')->paginate(5);
+        return language::collection($countryLanguage);
     }
 
     /**
@@ -44,9 +50,11 @@ class CountryLanguageController extends Controller
      * @param  \App\CountryLanguage  $countryLanguage
      * @return \Illuminate\Http\Response
      */
-    public function show(CountryLanguage $countryLanguage)
+    public function show($id)
     {
-        //
+        $language = CountryLanguage::with('country')->where("Language",$id)->get();
+    
+        return new language($language);
     }
 
     /**

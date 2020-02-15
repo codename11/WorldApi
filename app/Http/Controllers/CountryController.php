@@ -27,7 +27,7 @@ class CountryController extends Controller
         //$language = Country::where("Code","AFG")->with('language')->get();
         //$allInOne = Country::where("Code","AFG")->with('capital',"language")->get();
         //$allInAll = Country::with('capital',"language")->get();
-        $countries = Country::with('capital',"language")->paginate(5);
+        $countries = Country::with('capital',"cities","language")->paginate(5);
         /*$response = array(
             "capital" => $capital,
             "country" => $country,
@@ -58,7 +58,7 @@ class CountryController extends Controller
      */
     public function show($id)
     {
-        $country = Country::with('capital',"language")->where("Code",$id)->get();
+        $country = Country::with('capital',"cities","language")->where("Code",$id)->get();
     
         return new CountryResource($country);
     }

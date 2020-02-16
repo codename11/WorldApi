@@ -34,3 +34,12 @@ Route::get("languages", "CountryLanguageController@index");
 
 //Show language(single)
 Route::get("language/{id}", "CountryLanguageController@show");
+
+//Create new country
+Route::post("country", "CountryController@store");
+
+//Update country
+Route::put("country/{id}", "CountryController@store");
+
+//Delete country
+Route::delete("country/{id}", "CountryController@destroy");

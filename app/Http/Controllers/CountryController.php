@@ -47,7 +47,64 @@ class CountryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $country = null;
+        $capital = null;
+
+        if($request->isMethod("post")){
+
+            $country = new Country; 
+            $country->Code = $request->input("Code");
+            $country->Name = $request->input("Name");
+            $country->Continent = $request->input("Continent");
+
+            $country->Region = $request->input("Region");
+            $country->SurfaceArea = $request->input("SurfaceArea");
+            $country->IndepYear = $request->input("IndepYear");
+
+            $country->Population = $request->input("Population");
+            $country->LifeExpectancy = $request->input("LifeExpectancy");
+            $country->GNP = $request->input("GNP");
+
+            $country->GNPOld = $request->input("GNPOld");
+            $country->LocalName = $request->input("LocalName");
+            $country->GovernmentForm = $request->input("GovernmentForm");
+
+            $country->HeadOfState = $request->input("HeadOfState");
+            $country->Capital = null;
+            $country->Code2 = $request->input("Code2");
+
+        }
+
+        if($request->isMethod("put")){
+
+            $country = Country::findOrFail($request->Code);
+            
+            $country->Name = $request->input("Name");
+            $country->Continent = $request->input("Continent");
+
+            $country->Region = $request->input("Region");
+            $country->SurfaceArea = $request->input("SurfaceArea");
+            $country->IndepYear = $request->input("IndepYear");
+
+            $country->Population = $request->input("Population");
+            $country->LifeExpectancy = $request->input("LifeExpectancy");
+            $country->GNP = $request->input("GNP");
+
+            $country->GNPOld = $request->input("GNPOld");
+            $country->LocalName = $request->input("LocalName");
+            $country->GovernmentForm = $request->input("GovernmentForm");
+
+            $country->HeadOfState = $request->input("HeadOfState");
+            $country->Capital = $request->input("Capital");
+            $country->Code2 = $request->input("Code2");
+
+        }
+
+        if($country->save()){
+            return new CountryResource($country);
+        }
+        
     }
 
     /**
@@ -64,36 +121,19 @@ class CountryController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Country  $country
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Country $country)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Country  $country
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Country $country)
-    {
-        //
-    }
-
-    /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Country  $country
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Country $country)
+    public function destroy($id)
     {
-        //
+        $country = Country::where("Code",$id);
+        $deletedCountry = Country::where("Code",$id)->get();
+        
+        if($country->delete()){
+            return new CountryResource($countryDeledeletedCountryted);
+        }
+
     }
 }

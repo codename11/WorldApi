@@ -132,7 +132,7 @@ class CountryController extends Controller
         $deletedCountry = Country::where("Code",$id)->get();
         
         if($country->delete()){
-            return new CountryResource($countryDeledeletedCountryted);
+            return new CountryResource($deletedCountry);
         }
 
     }

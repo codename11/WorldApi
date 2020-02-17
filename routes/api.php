@@ -38,6 +38,15 @@ Route::get("cities", "CityController@index");
 //Show city(single)
 Route::get("city/{id}", "CityController@show");
 
+//Create city
+Route::post("city", "CityController@store");
+
+//Update city(single)
+Route::put("city/{id}", "CityController@store");
+
+//Delete city
+Route::delete("city/{id}", "CityController@destroy");
+
 //List languages
 Route::get("languages", "CountryLanguageController@index");
 

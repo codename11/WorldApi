@@ -319,6 +319,6 @@ Example of how should it look:
 
  ##### Tech used and etc: 
  - Laravel
- - Routes protected by cheking ip address before accessing them by using custom middleware on particular routes.
+ - Routes protected by checking ip address before accessing them by using custom middleware on particular routes.
  - Added middleware to handle CORS in local.
 

@@ -18,7 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 //List countries
-Route::get("countries", "CountryController@index")->middleware('ipcheck');
+Route::get("countries", "CountryController@index");
 
 //Show country(single)
 Route::get("country/{id}", "CountryController@show");
@@ -27,10 +27,10 @@ Route::get("country/{id}", "CountryController@show");
 Route::post("country", "CountryController@store")->middleware('ipcheck');
 
 //Update country
-Route::put("country/{id}", "CountryController@store");
+Route::put("country/{id}", "CountryController@store")->middleware('ipcheck');
 
 //Delete country
-Route::delete("country/{id}", "CountryController@destroy");
+Route::delete("country/{id}", "CountryController@destroy")->middleware('ipcheck');
 
 //List cities
 Route::get("cities", "CityController@index");
@@ -39,13 +39,13 @@ Route::get("cities", "CityController@index");
 Route::get("city/{id}", "CityController@show");
 
 //Create city
-Route::post("city", "CityController@store");
+Route::post("city", "CityController@store")->middleware('ipcheck');
 
 //Update city(single)
-Route::put("city/{id}", "CityController@store");
+Route::put("city/{id}", "CityController@store")->middleware('ipcheck');
 
 //Delete city
-Route::delete("city/{id}", "CityController@destroy");
+Route::delete("city/{id}", "CityController@destroy")->middleware('ipcheck');
 
 //List languages
 Route::get("languages", "CountryLanguageController@index");
@@ -54,10 +54,10 @@ Route::get("languages", "CountryLanguageController@index");
 Route::get("language/{id}", "CountryLanguageController@show");
 
 //Create language
-Route::post("language", "CountryLanguageController@store");
+Route::post("language", "CountryLanguageController@store")->middleware('ipcheck');
 
 //Update language(single)
-Route::put("language/{id}", "CountryLanguageController@store");
+Route::put("language/{id}", "CountryLanguageController@store")->middleware('ipcheck');
 
 //Delete language
-Route::delete("language/{id}", "CountryLanguageController@destroy");
+Route::delete("language/{id}", "CountryLanguageController@destroy")->middleware('ipcheck');

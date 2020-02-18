@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\City;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Country;
 use App\CountryLanguage;
+use App\City;
 use App\Http\Resources\City as CityResource;
 use App\Http\Resources\Country as CountryResource;
 use Illuminate\Support\Facades\DB;
@@ -59,6 +59,7 @@ class CityController extends Controller
         if($request->isMethod("put")){
             
             $city = City::findOrFail($request->ID);
+            
             $city->Name = $request->Name;
             $city->CountryCode = $request->CountryCode;
             $city->District = $request->District;

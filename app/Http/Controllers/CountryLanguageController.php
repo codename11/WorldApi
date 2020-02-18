@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Country;
 use App\City;
-use App\Http\Resources\language as language;
+use App\Http\Resources\language as LanguageResource;
 
 class CountryLanguageController extends Controller
 {
@@ -20,17 +20,7 @@ class CountryLanguageController extends Controller
     public function index()
     {
         $countryLanguage = CountryLanguage::with('country')->paginate(5);
-        return language::collection($countryLanguage);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return new LanguageResource($countryLanguage);
     }
 
     /**
@@ -41,7 +31,39 @@ class CountryLanguageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if($request->isMethod("post")){
+
+            $language = new CountryLanguage;
+
+            $language->CountryCode = $request->CountryCode;
+            $language->Language = $request->Language;
+            $language->IsOfficial = $request->IsOfficial;
+            $language->Percentage = $request->Percentage;
+
+            if($language->save()){
+
+                $languageWithCountry = CountryLanguage::with('country')->where("Language",$language->Language)->get();
+                return  new LanguageResource($languageWithCountry);
+
+            }  
+
+        }
+
+        if($request->isMethod("put")){
+
+            $language = CountryLanguage::where("Language",$request->Language)->first();
+
+            $language->CountryCode = $request->CountryCode;
+            $language->Language = $request->Language;
+            $language->IsOfficial = $request->IsOfficial;
+            $language->Percentage = $request->Percentage;
+
+            if($language->save()){
+                return  new LanguageResource($language);
+            }
+            //return  new LanguageResource($language);
+        }
+
     }
 
     /**
@@ -54,30 +76,7 @@ class CountryLanguageController extends Controller
     {
         $language = CountryLanguage::with('country')->where("Language",$id)->get();
     
-        return new language($language);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\CountryLanguage  $countryLanguage
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(CountryLanguage $countryLanguage)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\CountryLanguage  $countryLanguage
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, CountryLanguage $countryLanguage)
-    {
-        //
+        return new LanguageResource($language);
     }
 
     /**
@@ -86,8 +85,13 @@ class CountryLanguageController extends Controller
      * @param  \App\CountryLanguage  $countryLanguage
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CountryLanguage $countryLanguage)
+    public function destroy($id)
     {
-        //
+        $language = CountryLanguage::where("Language",$id);
+        $deletedLanguage = CountryLanguage::where("Language",$id)->get();
+        
+        if($language->delete()){
+            return new LanguageResource($deletedLanguage);
+        }
     }
 }

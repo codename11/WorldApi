@@ -74,6 +74,10 @@ class CountryController extends Controller
             $country->Capital = null;
             $country->Code2 = $request->input("Code2");
 
+            if($country->save()){
+                return new CountryResource($country);
+            }
+
         }
 
         if($request->isMethod("put")){
@@ -99,11 +103,13 @@ class CountryController extends Controller
             $country->Capital = $request->input("Capital");
             $country->Code2 = $request->input("Code2");
 
+            if($country->save()){
+                return new CountryResource($country);
+            }
+
         }
 
-        if($country->save()){
-            return new CountryResource($country);
-        }
+        
         
     }
 

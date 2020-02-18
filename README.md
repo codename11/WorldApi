@@ -313,7 +313,7 @@ Example of how should it look:
 ```
  - http://worldapi.test/api/language/dari for deleting an language. No json required.
 
- #### It was tricky considering that db World from MySQL website isn't made for specific use with Laravel, which is used as backend here.
+ #### It was tricky considering that db World from MySQL website isn't made for specific use with Laravel, which is used as backend here. Not all table have numerical primaries, nor all can be incremented, so i had to find way around to use it with Laravel.
 
  #### Also, only listing and showing for particular country, city and language are allowed. If you want to interact with db with POST, PUT and DELETE methods, it is posiible only within confines of local environment.
 

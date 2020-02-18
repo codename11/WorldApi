@@ -42,49 +42,6 @@ It was freely avaliable db from [MySQL](https://dev.mysql.com/doc/index-other.ht
 
  - http://worldapi.test/api/country/ABW for updating existing entry in country table, PUT method, uses same format as previous. Uses "Code" property for identification.
 
-  - List of avaliable keys for languages:
-  [
-    {
-        "Language": "Dutch"
-    },
-    {
-        "Language": "English"
-    },
-    {
-        "Language": "Papiamento"
-    },
-    {
-        "Language": "Spanish"
-    },
-    {
-        "Language": "Balochi"
-    },
-    {
-        "Language": "Dari"
-    },
-    {
-        "Language": "Pashto"
-    },
-    {
-        "Language": "Turkmenian"
-    },
-    {
-        "Language": "Uzbek"
-    },
-    {
-        "Language": "Ambo"
-    },
-    {
-        "Language": "Chokwe"
-    },
-    {
-        "Language": "Kongo"
-    },
-    {
-        "Language": "Luchazi"
-    },
-
-
  - http://worldapi.test/api/country/YYY for deleting entry from country table. Uses DELETE method, no need for additional parameter except in url.
 
  - http://worldapi.test/api/cities for list of cities, GET method. Return value is city itself with it's country and languages. 
@@ -286,6 +243,48 @@ It was freely avaliable db from [MySQL](https://dev.mysql.com/doc/index-other.ht
     }
 
  - http://worldapi.test/api/language/dari for getting particular language, GET method. Returns json with language data and it's country.
+
+ - List of avaliable keys for languages:
+  [
+    {
+        "Language": "Dutch"
+    },
+    {
+        "Language": "English"
+    },
+    {
+        "Language": "Papiamento"
+    },
+    {
+        "Language": "Spanish"
+    },
+    {
+        "Language": "Balochi"
+    },
+    {
+        "Language": "Dari"
+    },
+    {
+        "Language": "Pashto"
+    },
+    {
+        "Language": "Turkmenian"
+    },
+    {
+        "Language": "Uzbek"
+    },
+    {
+        "Language": "Ambo"
+    },
+    {
+        "Language": "Chokwe"
+    },
+    {
+        "Language": "Kongo"
+    },
+    {
+        "Language": "Luchazi"
+    },
 
  - http://worldapi.test/api/language for creating an entry in countrylanguage table, POST method.
 

@@ -18,13 +18,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 //List countries
-Route::get("countries", "CountryController@index");
+Route::get("countries", "CountryController@index")->middleware('ipcheck');
 
 //Show country(single)
 Route::get("country/{id}", "CountryController@show");
 
 //Create new country
-Route::post("country", "CountryController@store");
+Route::post("country", "CountryController@store")->middleware('ipcheck');
 
 //Update country
 Route::put("country/{id}", "CountryController@store");

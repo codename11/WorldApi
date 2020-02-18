@@ -310,3 +310,5 @@ Example of how should it look:
 
  #### It was tricky considering that db World from MySQL website isn't made for specific use with Laravel, which is used as backend here.
 
+ #### Also, only listing and showing particular country, city and language are allowed. If you want to interact with db with POST, PUT and DELETE methods, it is posiible only within confines of local environment.
+

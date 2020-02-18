@@ -317,3 +317,8 @@ Example of how should it look:
 
  #### Also, only listing and showing for particular country, city and language are allowed. If you want to interact with db with POST, PUT and DELETE methods, it is posiible only within confines of local environment.
 
+ ##### Tech used and etc: 
+ - Laravel
+ - Routes protected by cheking ip address before accessing them by using custom middleware on particular routes.
+ - Added middleware to handle CORS in local.
+

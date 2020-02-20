@@ -322,3 +322,5 @@ Example of how should it look:
  - Routes protected by checking ip address before accessing them by using custom middleware on particular routes.
  - Added middleware to handle CORS in local.
 
+ ###### Added Validation and custom redirect page when user tries to access certain routes/endpoints from unauthorized ip addresses. Credits for 403 template goes to: https://codepen.io/csb324/pen/XPyPGy
+

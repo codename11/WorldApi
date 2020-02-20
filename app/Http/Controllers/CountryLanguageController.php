@@ -9,6 +9,7 @@ use App\Http\Requests;
 use App\Country;
 use App\City;
 use App\Http\Resources\language as LanguageResource;
+use Illuminate\Support\Facades\Validator;
 
 class CountryLanguageController extends Controller
 {
@@ -31,6 +32,22 @@ class CountryLanguageController extends Controller
      */
     public function store(Request $request)
     {
+
+        $validation = Validator::make(
+            $request->all(),
+            [
+                'CountryCode' => 'required|max:3',
+                'Language' => 'required|max:30',
+                'IsOfficial' => 'required|in:T,F',
+                'Percentage' => 'required|numeric',
+            ]
+        );
+
+        $errors = $validation->errors();
+        if($validation->fails()){
+            return $errors->toJson();
+        }
+
         if($request->isMethod("post")){
 
             $language = new CountryLanguage;

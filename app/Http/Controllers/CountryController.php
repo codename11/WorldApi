@@ -9,6 +9,7 @@ use App\Country;
 use App\City;
 use App\CountryLanguage;
 use App\Http\Resources\Country as CountryResource;
+use Illuminate\Support\Facades\Validator;
 
 class CountryController extends Controller
 {
@@ -19,23 +20,9 @@ class CountryController extends Controller
      */
     public function index()
     {
-        //$city = City::find(1)->country()->get();
-        //$countries = Country::paginate(15);
-        //$capital = Country::where("Code","AFG")->with('capital')->get();
-        //$country = Country::where("Code","AFG")->get();
-        //$country = Country::where("Capital",$city->ID)->get();
-        //$language = Country::where("Code","AFG")->with('language')->get();
-        //$allInOne = Country::where("Code","AFG")->with('capital',"language")->get();
-        //$allInAll = Country::with('capital',"language")->get();
+
         $countries = Country::with('capital',"cities","language")->paginate(5);
-        /*$response = array(
-            "capital" => $capital,
-            "country" => $country,
-            "language" => $language,
-            "allInOne" => $allInOne,
-            "allInAll" => $allInAll,
-        );*/
-        //return response()->json($allInOne);
+
         return CountryResource::collection($countries);
     }
 
@@ -51,6 +38,35 @@ class CountryController extends Controller
         $country = null;
         $capital = null;
 
+        $validation = Validator::make(
+            $request->all(),
+            [
+                'Code' => 'required|max:3',
+                'Name' => 'required|max:52',
+                'Continent' => 'required|in:Asia,Europe,North America,Africa,Oceania,Antarctica,South America',
+                'Region' => 'required|max:26',
+                
+                'IndepYear' => 'required|numeric|digits_between:1,6',
+                'Population' => 'required|numeric|digits_between:1,11',
+                
+                'LocalName' => 'required|max:45',
+                'GovernmentForm' => 'required|max:45',
+                'HeadOfState' => 'required|max:60',
+                'Capital' => 'numeric|digits_between:1,11|nullable',
+                'Code2' => 'required|max:2',
+
+                'SurfaceArea' => 'required|numeric',
+                'LifeExpectancy' => 'required|numeric',
+                'GNP' => 'required|numeric',
+                'GNPOld' => 'numeric|nullable',
+            ]
+        );
+
+        $errors = $validation->errors();
+        if($validation->fails()){
+            return $errors->toJson();
+        }
+        
         if($request->isMethod("post")){
 
             $country = new Country; 

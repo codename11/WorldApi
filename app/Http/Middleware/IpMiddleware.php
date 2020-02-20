@@ -18,7 +18,8 @@ class IpMiddleware
         if ($request->ip() != "127.0.0.1") {
             // here instead of checking a single ip address we can do collection of ips
             //address in constant file and check with in_array function
-                return redirect('/');
+                
+                return redirect()->route('errors/403');
             }
     
         return $next($request);

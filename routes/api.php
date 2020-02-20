@@ -61,3 +61,10 @@ Route::put("language/{id}", "CountryLanguageController@store")->middleware('ipch
 
 //Delete language
 Route::delete("language/{id}", "CountryLanguageController@destroy")->middleware('ipcheck');
+
+//Error 403
+//Route::get("errors/403", "ErrorsController@error403");
+Route::get('errors/403', [
+    'as' => 'errors/403',
+    'uses' => 'ErrorsController@error403',
+]);

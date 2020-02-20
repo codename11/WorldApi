@@ -11,6 +11,7 @@ use App\City;
 use App\Http\Resources\City as CityResource;
 use App\Http\Resources\Country as CountryResource;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class CityController extends Controller
 {
@@ -33,6 +34,22 @@ class CityController extends Controller
      */
     public function store(Request $request)
     {
+
+        $validation = Validator::make(
+            $request->all(),
+            [
+                'Name' => 'required|max:35',
+                'CountryCode' => 'required|max:3',
+                'District' => 'required|max:20',
+                'Population' => 'required|numeric',
+            ]
+        );
+
+        $errors = $validation->errors();
+        if($validation->fails()){
+            return $errors->toJson();
+        }
+
         if($request->isMethod("post")){
 
             $city = new City;
